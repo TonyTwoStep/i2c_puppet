@@ -46,7 +46,7 @@ static const struct entry kbd_entries[][NUM_OF_COLS] =
 	{ { },                 { ' ', '\t' },             { 'C', '9' },              { 'Z', '7' },              { 'M', '.'  },  { 'N', ','  } },
 	{ { KEY_BTN_LEFT2 },   { .mod = KEY_MOD_ID_SYM }, { 'T', '(' },              { 'D', '5' },              { 'I', '-'  },  { 'Y', ')'  } },
 	{ { KEY_BTN_RIGHT1 },  { .mod = KEY_MOD_ID_ALT }, { 'V', '?' },              { 'X', '8' },              { '$', '`'  },  { 'B', '!'  } },
-	{ { },                 { 'A', '*' },              { .mod = KEY_MOD_ID_SHR }, { 'P', '@' },              { '\b' },       { '\n', '|' } },
+	{ { },                 { 'A', '*' },              { .mod = KEY_MOD_ID_SHR }, { 'P', '@' },              { '\b','\b' },  { '\n', '|' } },
 };
 
 #if NUM_OF_BTNS > 0
@@ -114,15 +114,18 @@ static void transition_to(struct list_item * const p_item, const enum key_state 
 			default:
 			{
 				if (reg_is_bit_set(REG_ID_CFG, CFG_USE_MODS)) {
-					const bool shift = (self.mods[KEY_MOD_ID_SHL] || self.mods[KEY_MOD_ID_SHR]) | self.capslock;
+// 					const bool shift = (self.mods[KEY_MOD_ID_SHL] || self.mods[KEY_MOD_ID_SHR]) | self.capslock;
+					const bool shift = self.mods[KEY_MOD_ID_SHL] | self.capslock;
 					const bool alt = self.mods[KEY_MOD_ID_ALT] | self.numlock;
 //					const bool is_button = (key <= KEY_BTN_RIGHT1) || ((key >= KEY_BTN_LEFT2) && (key <= KEY_BTN_RIGHT2));
 					const bool is_button = ((key == KEY_BTN_RIGHT1)
-                                            || (key == KEY_BTN_RIGHT2)
-                                            || (key == KEY_BTN_LEFT1)
-                                            || (key == KEY_BTN_LEFT2));
- 					const bool control = self.mods[KEY_MOD_ID_SYM];
-
+															 || (key == KEY_BTN_RIGHT2)
+															 || (key == KEY_BTN_LEFT1)
+															 || (key == KEY_BTN_LEFT2));
+//  					const bool control = self.mods[KEY_MOD_ID_SYM];
+					const bool control = self.mods[KEY_MOD_ID_SHR] && !self.mods[KEY_MOD_ID_SYM];
+					const bool fnKey   = self.mods[KEY_MOD_ID_SYM] && !self.mods[KEY_MOD_ID_SHR];
+					const bool cAfnKey = self.mods[KEY_MOD_ID_SYM] && self.mods[KEY_MOD_ID_SHR];
 
 					if (is_button) {
 						switch (key) {
@@ -132,9 +135,9 @@ static void transition_to(struct list_item * const p_item, const enum key_state 
 							} else if (shift) {
 								key = '<';
 							} else if (control) {
-								key = 'x';
+								key = KEY_GUI;
 							} else {
-								key =0x1B; // ESC
+								key = KEY_ESCAPE; // ESC
 							}
 							break;
 						case KEY_BTN_LEFT2:
@@ -143,7 +146,7 @@ static void transition_to(struct list_item * const p_item, const enum key_state 
 							} else if (shift) {
 								key = '[';
 							} else if (control) {
-								key ='x';
+								key = KEY_APP;
 							} else {
 								key = '%';
 							}
@@ -154,7 +157,7 @@ static void transition_to(struct list_item * const p_item, const enum key_state 
 							} else if (shift) {
 								key = '{';
 							} else if (control) {
-								key = 'x';
+								key = KEY_MENU;
 							} else {
 								key = '=';
 							}
@@ -165,7 +168,9 @@ static void transition_to(struct list_item * const p_item, const enum key_state 
 							} else if (shift) {
 								key = '^';
 							} else if (control) {
-								key = 'x'; // TODO
+								key = 'x';
+							} else if (cAfnKey) {
+								key = KEY_PWR;
 							} else {
 								key = '\\';
 							}
@@ -177,6 +182,19 @@ static void transition_to(struct list_item * const p_item, const enum key_state 
 					} else if (alt) {
 						printf(" alt\n");
 						key = p_entry->alt;
+					} else if (fnKey || cAfnKey) {
+						key = p_entry->alt;
+						if ((key >= '0') && (key <= '9')) {
+							if (fnKey) {
+								key += (KEY_F10 - '0');
+								printf(" fn\n") ;
+							} else {
+								key += (KEY_CAF10 - '0');
+								printf(" ctrl-alt-fn\n") ;
+							}
+						} else {
+							key = '\0' ;
+						}
 					} else if (key >= 'A' && key <= 'Z') {
 						printf(" letter\n");
 						if (control) { // If the SYM key is held down, it's a control key

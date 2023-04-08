@@ -56,13 +56,48 @@ static void key_cb(char key, enum key_state state)
 
 	if (tud_hid_n_ready(USB_ITF_KEYBOARD) && reg_is_bit_set(REG_ID_CF2, CF2_USB_KEYB_ON)) {
 		// conv_table needs to be 256 entries long because the special keys are in range 128-256 (0x80 - 0xFF)
-		uint8_t conv_table[256][2]		= { HID_ASCII_TO_KEYCODE };
-		conv_table['\n'][1]				= HID_KEY_ENTER; // Fixup: Enter instead of Return
-		conv_table['\b'][1]				= HID_KEY_BACKSPACE; // Fixup: HID backspace (0x2A) instead of \b (0x08)
-		conv_table[KEY_JOY_UP][1]		= HID_KEY_ARROW_UP;
-		conv_table[KEY_JOY_DOWN][1]		= HID_KEY_ARROW_DOWN;
-		conv_table[KEY_JOY_LEFT][1]		= HID_KEY_ARROW_LEFT;
-		conv_table[KEY_JOY_RIGHT][1]	= HID_KEY_ARROW_RIGHT;
+		uint8_t conv_table[256][2]   = { HID_ASCII_TO_KEYCODE };
+		conv_table['\n'][1]          = HID_KEY_ENTER;       // Fixup: Enter instead of Return
+		conv_table['\b'][1]          = HID_KEY_BACKSPACE;   // Fixup: HID backspace (0x2A) instead of \b (0x08)
+		conv_table[KEY_JOY_UP][1]    = HID_KEY_ARROW_UP;
+		conv_table[KEY_JOY_DOWN][1]  = HID_KEY_ARROW_DOWN;
+		conv_table[KEY_JOY_LEFT][1]  = HID_KEY_ARROW_LEFT;
+		conv_table[KEY_JOY_RIGHT][1] = HID_KEY_ARROW_RIGHT;
+
+		conv_table[KEY_HOME][1]      = HID_KEY_HOME;
+		conv_table[KEY_END][1]       = HID_KEY_END;
+		conv_table[KEY_PAGE_UP][1]   = HID_KEY_PAGE_UP;
+		conv_table[KEY_PAGE_DOWN][1] = HID_KEY_PAGE_DOWN;
+
+		conv_table[KEY_GUI][1]       = HID_KEY_GUI_LEFT;
+		conv_table[KEY_APP][1]       = HID_KEY_APPLICATION;
+		conv_table[KEY_MENU][1]      = HID_KEY_MENU;
+
+		conv_table[KEY_PWR][1]       = HID_KEY_POWER;
+
+		conv_table[KEY_ESCAPE][1]    = HID_KEY_ESCAPE;
+
+		conv_table[KEY_F1][1]        = HID_KEY_F1;
+		conv_table[KEY_F2][1]        = HID_KEY_F2;
+		conv_table[KEY_F3][1]        = HID_KEY_F3;
+		conv_table[KEY_F4][1]        = HID_KEY_F4;
+		conv_table[KEY_F5][1]        = HID_KEY_F5;
+		conv_table[KEY_F6][1]        = HID_KEY_F6;
+		conv_table[KEY_F7][1]        = HID_KEY_F7;
+		conv_table[KEY_F8][1]        = HID_KEY_F8;
+		conv_table[KEY_F9][1]        = HID_KEY_F9;
+		conv_table[KEY_F10][1]       = HID_KEY_F10;
+
+		conv_table[KEY_CAF1][1]      = HID_KEY_F1;
+		conv_table[KEY_CAF2][1]      = HID_KEY_F2;
+		conv_table[KEY_CAF3][1]      = HID_KEY_F3;
+		conv_table[KEY_CAF4][1]      = HID_KEY_F4;
+		conv_table[KEY_CAF5][1]      = HID_KEY_F5;
+		conv_table[KEY_CAF6][1]      = HID_KEY_F6;
+		conv_table[KEY_CAF7][1]      = HID_KEY_F7;
+		conv_table[KEY_CAF8][1]      = HID_KEY_F8;
+		conv_table[KEY_CAF9][1]      = HID_KEY_F9;
+		conv_table[KEY_CAF10][1]     = HID_KEY_F10;
 
 		uint8_t keycode[6] = { 0 };
 		uint8_t modifier   = 0;
@@ -80,6 +115,8 @@ static void key_cb(char key, enum key_state state)
 					modifier=KEYBOARD_MODIFIER_RIGHTCTRL;
 					key=key + 0x40;
 				}
+			} else if ((key >= KEY_CAF10) && (key <= KEY_CAF9)) {
+			  modifier = KEYBOARD_MODIFIER_LEFTALT | KEYBOARD_MODIFIER_LEFTCTRL ;
 			}
 			keycode[0] = conv_table[(int)key][1];
 		}
