@@ -12,6 +12,8 @@
 #include <RP2040.h> // TODO: When there's more than one RP chip, change this to be more generic
 #include <stdio.h>
 
+#include "pico/bootrom.h"
+
 // We don't enable this by default cause it spams quite a lot
 //#define DEBUG_REGS
 
@@ -148,6 +150,12 @@ void reg_process_packet(uint8_t in_reg, uint8_t in_data, uint8_t *out_buffer, ui
 	}
 
 	case REG_ID_RST:
+		if (is_write) {
+			if (in_data == 0x99) {
+				reset_usb_boot(0,0);
+				break;
+			}
+		}
 		NVIC_SystemReset();
 		break;
 	}
