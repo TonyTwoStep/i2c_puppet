@@ -29,15 +29,20 @@ instance, ALT + spacebar provides TAB, and ALT+NewLine is the pipe character.
 
 
 This firmware adds the following mappings
-~~~~~~~~
-RShift       [A-Z] - Ctrl [A-Z]
-Sym          [0-9] - F10, F1-F9
-RShift + Sym [0-9] - Ctrl+Alt F10, F1-F9
-RShift + Sym R2    - Power
+-----------------------------------------
 
-LShift + Swipe Up/Down/Left/Right - Page Up/Page Down/Home/End
-RShift + Swip Up/Down             - Scroll Up/Down
-RShift + Swip Left/Right          - Pan Left/Right
+|                    |                     |
+|--------------------|---------------------|
+| RShift       [A-Z] | Ctrl [A-Z]          |
+| Sym          [0-9] | F10, F1-F9          |
+| RShift + Sym [0-9] | Ctrl+Alt F10, F1-F9 |
+| RShift + Sym R2    | Power               |
+
+|                                   |                            |
+|-----------------------------------|----------------------------|
+| LShift + Swipe Up/Down/Left/Right | Page Up/Page Down/Home/End |
+| RShift + Swipe Up/Down            | Scroll Up/Down             |
+| RShift + Swipe Left/Right         | Pan Left/Right             |
 
 |        | L1     | L2  | R1 | R2 | SPKR | Mic | BS  | NL     | SPACE |
 |--------|--------|-----|----|----|------|-----|-----|--------|-------|
