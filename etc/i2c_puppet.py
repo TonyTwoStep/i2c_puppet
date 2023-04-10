@@ -61,9 +61,9 @@ PUD_UP           = 1
 
 
 class I2CPuppet:
-    def __init__(self, vid=0x1209, pid=0xB182):
+    def __init__(self, vid=0x1209, pid=0xB182, backend=None):
         self._buffer = bytearray(2)
-        self._dev = usb.core.find(idVendor=vid, idProduct=pid)
+        self._dev = usb.core.find(idVendor=vid, idProduct=pid, backend=backend)
 
         if self._dev is None:
             raise Exception('Device with vid:pid %04X:%04X not found!' % (vid, pid))
@@ -104,11 +104,11 @@ class I2CPuppet:
 
     @property
     def dimmingDelay(self):
-        return self._read_register(_REG_BK3)
+        return self._read_register(_REG_BK3) / 2
 
     @dimmingDelay.setter
     def dimmingDelay(self, value):
-        self._write_register(_REG_BK3, value)
+        self._write_register(_REG_BK3, int(value * 2))
 
     @property
     def dimmingLevel(self):
