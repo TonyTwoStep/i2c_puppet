@@ -143,20 +143,20 @@ static void transition_to(struct list_item * const p_item, const enum key_state 
 							else              { key = KEY_TAB; }
 							break;
 						case KEY_BTN_RIGHT1:
-							if (alt)          { key = '}'; }
-							else if (shift)   { key = '{'; }
-							else if (control) { key = 0;   }
-							else if (fnKey)   { key = '='; }
-							else if (cAfnKey) { key = 0;   }
-							else              { key = 0;   }
+							if (alt)          { key = '}';        }
+							else if (shift)   { key = '{';        }
+							else if (control) { key = 0;          }
+							else if (fnKey)   { key = '=';        }
+							else if (cAfnKey) { key = 0;          }
+							else              { key = KEY_MOUSE3; }
 							break;
 						case KEY_BTN_RIGHT2:
-							if (alt)          { key = '&';     }
-							else if (shift)   { key = '^';     }
-							else if (control) { key = 0;       }
-							else if (fnKey)   { key = '\\';    }
-							else if (cAfnKey) { key = KEY_PWR; }
-							else              { key = 0;       }
+							if (alt)          { key = '&';        }
+							else if (shift)   { key = '^';        }
+							else if (control) { key = 0;          }
+							else if (fnKey)   { key = '\\';       }
+							else if (cAfnKey) { key = KEY_PWR;    }
+							else              { key = KEY_MOUSE2; }
 							break;
 						default:
 // 							printf(" ERROR: Illegal key: %d\n", key);

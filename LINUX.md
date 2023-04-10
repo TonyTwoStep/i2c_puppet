@@ -44,24 +44,19 @@ This firmware adds the following mappings
 | RShift + Swipe Up/Down            | Scroll Up/Down             |
 | RShift + Swipe Left/Right         | Pan Left/Right             |
 
-|        | L1     | L2  | R1 | R2 | SPKR | Mic | BS  | NL     | SPACE |
-|--------|--------|-----|----|----|------|-----|-----|--------|-------|
-| none   | ESCAPE | TAB |    |    |  $   |  ~  | BS  | ENTER  | SPACE |
-| Alt    |  >     |  ]  | }  | &  |  \`  |  0  | DEL | RETURN | SPACE |
-| LShift |  <     |  [  | {  | ^  |      |     |     |        |       |
-| RShift | GUI    |     |    |    |      |     |     |        |       |
-| Sym    |  \|    |  %  | =  | \\ |      |     |     |        |       |
-
+|        | L1     | L2  | R1          | R2         | SPKR | Mic | BS  | NL     | SPACE |
+|--------|--------|-----|-------------|------------|------|-----|-----|--------|-------|
+| none   | ESCAPE | TAB | CenterMouse | RightMouse |  $   |  ~  | BS  | ENTER  | SPACE |
+| Alt    |  >     |  ]  | }           | &          |  \`  |  0  | DEL | RETURN | SPACE |
+| LShift |  <     |  [  | {           | ^          |      |     |     |        |       |
+| RShift | GUI    |     |             |            |      |     |     |        |       |
+| Sym    |  \|    |  %  | =           | \\         |      |     |     |        |       |
 
 
 I tried to make the bracket characters easierr to remember by using
 Shift+ to indicate the left-pointing brackets, and Alt+ corresponds to
 the same right-pointing bracket. You can redefine these keys if you
 prefer a different arraingment.
-
-~Currently, SYM+<top button keys> produces an 'x' to indicate some value can be inserted.
-I'm considering mapping these to the 4 arrow keys~
-
 
 ## Linux Debug tips
 

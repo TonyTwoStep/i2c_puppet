@@ -33,6 +33,9 @@ enum key_mod
 #define KEY_BTN_LEFT2  0x88
 #define KEY_BTN_RIGHT2 0x89
 
+#define KEY_MOUSE2     0x8A
+#define KEY_MOUSE3     0x8B
+
 #define KEY_ESCAPE     0x90
 #define KEY_DEL        0x91
 #define KEY_BS         0x92
