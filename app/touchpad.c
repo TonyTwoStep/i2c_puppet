@@ -7,6 +7,7 @@
 #include <pico/binary_info.h>
 #include <pico/stdlib.h>
 #include <stdio.h>
+#include <tusb.h>
 
 #define DEV_ADDR			0x3B
 
@@ -96,7 +97,7 @@ void touchpad_gpio_irq(uint gpio, uint32_t events)
 					key = (x < 0) ? KEY_JOY_LEFT : KEY_JOY_RIGHT;
 				}
 			}
-		} else if (keyboard_is_mod_on(KEY_MOD_ID_SYM)) {
+		} else if (keyboard_is_mod_on(KEY_MOD_ID_SHL)) {
 			if (to_ms_since_boot(get_absolute_time()) - self.last_swipe_time > SWIPE_COOLDOWN_TIME_MS) {
 				if (MOTION_IS_SWIPE(y, x)) {
 					key = (y < 0) ? KEY_PAGE_UP : KEY_PAGE_DOWN;
@@ -104,6 +105,8 @@ void touchpad_gpio_irq(uint gpio, uint32_t events)
 					key = (x < 0) ? KEY_HOME : KEY_END;
 				}
 			}
+		} else if (keyboard_is_mod_on(KEY_MOD_ID_SHR)) {
+			tud_hid_n_mouse_report(USB_ITF_MOUSE, 0, 0x00, 0, 0, x, y);
 		} else {
 			backlight_trigger();
 			if (self.callbacks) {

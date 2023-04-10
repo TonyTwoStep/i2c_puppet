@@ -10,7 +10,7 @@ which made it difficult to use on Linux systems
 This version of the firmware has been modified to support Linux systems.
 The following changes have been made
 - The backspace key works during the GUI login
-- The Sym key now acts as a Control key, so SYM+C is Control-C
+- The RShift key now acts as a Control key, so RShift+C is Control-C
 - The four top button keys are now used to provide the missing characters.
 
 The original definiton of the keys were this. I'm including the
@@ -29,14 +29,23 @@ instance, ALT + spacebar provides TAB, and ALT+NewLine is the pipe character.
 
 
 This firmware adds the following mappings
+~~~~~~~~
+RShift       [A-Z] - Ctrl [A-Z]
+Sym          [0-9] - F10, F1-F9
+RShift + Sym [0-9] - Ctrl+Alt F10, F1-F9
+RShift + Sym R2    - Power
 
+LShift + Swipe Up/Down/Left/Right - Page Up/Page Down/Home/End
+RShift + Swip Up/Down             - Scroll Up/Down
+RShift + Swip Left/Right          - Pan Left/Right
 
-|       | L1     | L2    |    R1 |    R2 | SPKR | Mic| BS| NL |  SPACE  |
-| ------|--------|-------|-------|-------|------|----|---|----|---------|
-| none  | ESCAPE |  %    |  =    |  \\   |  $   |  ~ | \b| \n | SPACE   |
-| Alt   |  >     |  ]    |  }    |  &    |  \`  |  0 |   | \| |  TAB    |
-| Shift |  <     |  [    |  {    |  ^    |  $   |  ~ | \b|    |         |
-| Sym   |  x     |  x    |  x    |  x    |  $   |  ~ | \b|    |         |
+|        | L1     | L2  | R1 | R2 | SPKR | Mic | BS  | NL     | SPACE |
+|--------|--------|-----|----|----|------|-----|-----|--------|-------|
+| none   | ESCAPE | TAB |    |    |  $   |  ~  | BS  | ENTER  | SPACE |
+| Alt    |  >     |  ]  | }  | &  |  \`  |  0  | DEL | RETURN | SPACE |
+| LShift |  <     |  [  | {  | ^  |      |     |     |        |       |
+| RShift | GUI    |     |    |    |      |     |     |        |       |
+| Sym    |  \|    |  %  | =  | \\ |      |     |     |        |       |
 
 
 
@@ -45,8 +54,8 @@ Shift+ to indicate the left-pointing brackets, and Alt+ corresponds to
 the same right-pointing bracket. You can redefine these keys if you
 prefer a different arraingment.
 
-Currently, SYM+<top button keys> produces an 'x' to indicate some value can be inserted.
-I'm considering mapping these to the 4 arrow keys
+~Currently, SYM+<top button keys> produces an 'x' to indicate some value can be inserted.
+I'm considering mapping these to the 4 arrow keys~
 
 
 ## Linux Debug tips

@@ -58,7 +58,7 @@ static void key_cb(char key, enum key_state state)
 		// conv_table needs to be 256 entries long because the special keys are in range 128-256 (0x80 - 0xFF)
 		uint8_t conv_table[256][2]   = { HID_ASCII_TO_KEYCODE };
 		conv_table['\n'][1]          = HID_KEY_ENTER;       // Fixup: Enter instead of Return
-		conv_table['\b'][1]          = HID_KEY_BACKSPACE;   // Fixup: HID backspace (0x2A) instead of \b (0x08)
+		conv_table[KEY_BS][1]        = HID_KEY_BACKSPACE;   // Fixup: HID backspace (0x2A) instead of \b (0x08)
 		conv_table[KEY_JOY_UP][1]    = HID_KEY_ARROW_UP;
 		conv_table[KEY_JOY_DOWN][1]  = HID_KEY_ARROW_DOWN;
 		conv_table[KEY_JOY_LEFT][1]  = HID_KEY_ARROW_LEFT;
@@ -76,6 +76,10 @@ static void key_cb(char key, enum key_state state)
 		conv_table[KEY_PWR][1]       = HID_KEY_POWER;
 
 		conv_table[KEY_ESCAPE][1]    = HID_KEY_ESCAPE;
+		conv_table[KEY_DEL][1]       = HID_KEY_DELETE;
+		conv_table[KEY_TAB][1]       = HID_KEY_TAB;
+		conv_table[KEY_ENTER][1]     = HID_KEY_ENTER;
+		conv_table[KEY_RETURN][1]    = HID_KEY_RETURN;
 
 		conv_table[KEY_F1][1]        = HID_KEY_F1;
 		conv_table[KEY_F2][1]        = HID_KEY_F2;
@@ -107,14 +111,9 @@ static void key_cb(char key, enum key_state state)
 			if (conv_table[(int)key][0]) {
 				modifier = KEYBOARD_MODIFIER_LEFTSHIFT;
 			} else if (key < 0x20) { // it's a control key
-				if ((key == '\n') || (key == '\b')) {
-					// leave alone - this is necessary because the Linux graphical login processes the HID equivalent
-					// which is done using conv_table[] below
-				} else {
-					// convert control key, i.e. [Control-A] converts to [modifier=control, key=A]
-					modifier=KEYBOARD_MODIFIER_RIGHTCTRL;
-					key=key + 0x40;
-				}
+				// convert control key, i.e. [Control-A] converts to [modifier=control, key=A]
+				modifier=KEYBOARD_MODIFIER_RIGHTCTRL;
+				key=key + 0x40;
 			} else if ((key >= KEY_CAF10) && (key <= KEY_CAF9)) {
 			  modifier = KEYBOARD_MODIFIER_LEFTALT | KEYBOARD_MODIFIER_LEFTCTRL ;
 			}

@@ -34,6 +34,12 @@ enum key_mod
 #define KEY_BTN_RIGHT2 0x89
 
 #define KEY_ESCAPE     0x90
+#define KEY_DEL        0x91
+#define KEY_BS         0x92
+#define KEY_ENTER      0x93
+#define KEY_TAB        0x94
+#define KEY_RETURN     0x95
+
 // 0x08 - BACKSPACE
 // 0x09 - TAB
 // 0x0A - NEW LINE
