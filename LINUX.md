@@ -31,18 +31,12 @@ This firmware adds the following mappings
 
 |        | L1     | L2  | R1          | R2         | SPKR | Mic | BS  | NL     | SPACE |
 |--------|--------|-----|-------------|------------|------|-----|-----|--------|-------|
-| none   | ESCAPE | GUI | PgDown      | PgUp       |  $   |  ~  | BS  | ENTER  | SPACE |
+| none   | ESCAPE | GUI | Middle Click | RightClick|  $   |  ~  | BS  | ENTER  | SPACE |
 | Alt    |  [     |  ]  | &           | ^          |  \`  |  0  | DEL | RETURN | TAB   |
 | LShift |  {     |  }  | <           | >          |      |     |     |        |       |
 | RShift | CAPS   | NUM | Lock        | Power      |      |     |     |        |       |
 | Sym    |  \|    |  %  | =           | \\         |      |     |     |        |       |
-											  
-											  
-I tried to make the bracket characters easierr to remember by using
-Shift+ to indicate the left-pointing brackets, and Alt+ corresponds to
-the same right-pointing bracket. You can redefine these keys if you
-prefer a different arraingment.
-
+									
 ## Linux Debug tips
 
 The keyboard has two "outputs" - one is the USB HID interface, the
