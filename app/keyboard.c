@@ -43,7 +43,7 @@ static const struct entry kbd_entries[][NUM_OF_COLS] =
 	{ { KEY_JOY_CENTER },  { 'W', '1' },              { 'G', '/' },              { 'S', '4' },              { 'L', '"'  },       { 'H' , ':' } },
 	{ { },                 { 'Q', '#' },              { 'R', '3' },              { 'E', '2' },              { 'O', '+'  },       { 'U', '_'  } },
 	{ { KEY_BTN_LEFT1 },   { '~', '0' },              { 'F', '6' },              { .mod = KEY_MOD_ID_SHL }, { 'K', '\'' },       { 'J', ';'  } },
-	{ { },                 { ' ', ' ' },              { 'C', '9' },              { 'Z', '7' },              { 'M', '.'  },       { 'N', ','  } },
+	{ { },                 { ' ', 'KEY_TAB' },        { 'C', '9' },              { 'Z', '7' },              { 'M', '.'  },       { 'N', ','  } },
 	{ { KEY_BTN_LEFT2 },   { .mod = KEY_MOD_ID_SYM }, { 'T', '(' },              { 'D', '5' },              { 'I', '-'  },       { 'Y', ')'  } },
 	{ { KEY_BTN_RIGHT1 },  { .mod = KEY_MOD_ID_ALT }, { 'V', '?' },              { 'X', '8' },              { '$', '`'  },       { 'B', '!'  } },
 	{ { },                 { 'A', '*' },              { .mod = KEY_MOD_ID_SHR }, { 'P', '@' },              { KEY_BS, KEY_DEL }, { KEY_ENTER, KEY_RETURN } },
@@ -127,33 +127,33 @@ static void transition_to(struct list_item * const p_item, const enum key_state 
 					if (is_button) {
 						switch (key) {
 						case KEY_BTN_LEFT1:
-							if (alt)          { key = '>';        }
-							else if (shift)   { key = '<';        }
-							else if (control) { key = KEY_GUI;    }
+							if (alt)          { key = '[';        }
+							else if (shift)   { key = '{';        }
+							else if (control) { key = KEY_CAPS;    }
 							else if (fnKey)   { key = '|';        }
 							else if (cAfnKey) { key = 0;          }
-							else              { key = KEY_ESCAPE; }
+							else              { key = KEY_ESC; }
 							break;
 						case KEY_BTN_LEFT2:
 							if (alt)          { key = ']';     }
-							else if (shift)   { key = '[';     }
-							else if (control) { key = 0;       }
+							else if (shift)   { key = '}';     }
+							else if (control) { if (!self.numlock) { self.numlock = true; } else { self.numlock = false; }}
 							else if (fnKey)   { key = '%';     }
 							else if (cAfnKey) { key = 0;       }
-							else              { key = KEY_TAB; }
+							else              { key = KEY_GUI; }
 							break;
 						case KEY_BTN_RIGHT1:
-							if (alt)          { key = '}';        }
-							else if (shift)   { key = '{';        }
-							else if (control) { key = 0;          }
+							if (alt)          { key = '&';        }
+							else if (shift)   { key = '<';        }
+							else if (control) { key = KEY_APP;    }
 							else if (fnKey)   { key = '=';        }
 							else if (cAfnKey) { key = 0;          }
 							else              { key = KEY_MOUSE3; }
 							break;
 						case KEY_BTN_RIGHT2:
-							if (alt)          { key = '&';        }
-							else if (shift)   { key = '^';        }
-							else if (control) { key = 0;          }
+							if (alt)          { key = '^';        }
+							else if (shift)   { key = '>';        }
+							else if (control) { key = KEY_MENU;   }
 							else if (fnKey)   { key = '\\';       }
 							else if (cAfnKey) { key = KEY_PWR;    }
 							else              { key = KEY_MOUSE2; }
