@@ -34,7 +34,7 @@ This firmware adds the following mappings
 | none   | ESCAPE | GUI | Middle Click | RightClick|  $   |  ~  | BS  | ENTER  | SPACE |
 | Alt    |  [     |  ]  | &           | ^          |  \`  |  0  | DEL | RETURN | TAB   |
 | LShift |  {     |  }  | <           | >          |      |     |     |        |       |
-| RShift | CAPS   | NUM | Lock        | Power      |      |     |     |        |       |
+| RShift |  Caps  | Num | App         | Menu       |      |     |     |        |       |
 | Sym    |  \|    |  %  | =           | \\         |      |     |     |        |       |
 									
 ## Linux Debug tips
