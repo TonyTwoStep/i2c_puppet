@@ -13,21 +13,6 @@ The following changes have been made
 - The RShift key now acts as a Control key, so RShift+C is Control-C
 - The four top button keys are now used to provide the missing characters.
 
-The original definiton of the keys were this. I'm including the
-spacebar, newline/enter, backspace, Microphone and Spkeaer keys
-because they provide characters not indicated on the key. For
-instance, ALT + spacebar provides TAB, and ALT+NewLine is the pipe character.
-
-
-|      | L1    | L2    |    R1 |    R2 | SPKR | Mic| BS | NL |  SPACE  |
-| ------|-------|-------|-------|-------|------|----|---|----|---------|
-| none  |       |       |       |       |  $   |  ~ | \b| \n | SPACE   |
-| Alt   |       |       |       |       |  \`  |  0 |   | \| |  TAB    |
-| Shift |       |       |       |       |  $   |    |   |    |         |
-| Sym   |       |       |       |       |  $   |    |   |    |         |
-
-
-
 This firmware adds the following mappings
 -----------------------------------------
 
